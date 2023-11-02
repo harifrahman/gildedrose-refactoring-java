@@ -1,4 +1,4 @@
-package gildedrose.refactoring.java;
+package com.gildedrose.refactoring;
 
 class GildedRose {
     Item[] items;

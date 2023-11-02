@@ -1,4 +1,4 @@
-package gildedrose.refactoring.java;
+package com.gildedrose.refactoring;
 
 public class TextTestFixture {
     public static void main(String[] args) {

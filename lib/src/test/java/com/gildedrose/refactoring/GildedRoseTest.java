@@ -1,4 +1,4 @@
-package gildedrose.refactoring.java;
+package com.gildedrose.refactoring;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Nested;

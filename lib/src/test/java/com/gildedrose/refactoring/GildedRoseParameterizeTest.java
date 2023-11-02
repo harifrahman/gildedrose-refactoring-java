@@ -1,4 +1,4 @@
-package gildedrose.refactoring.java;
+package com.gildedrose.refactoring;
 
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -24,7 +24,12 @@ class GildedRoseParameterizeTest {
                 Arguments.of("Backstage passes to a TAFKAL80ETC concert", "sell in less than 10", "increase quality by two", 10, 21, 9, 23),
                 Arguments.of("Backstage passes to a TAFKAL80ETC concert", "sell in less than 5", "increase quality by three", 5, 23, 4, 26),
                 Arguments.of("Backstage passes to a TAFKAL80ETC concert", "sell in passed", "drop quality to zero", 0, 26, -1, 0),
-                Arguments.of("Backstage passes to a TAFKAL80ETC concert", "sell in passed", "drop quality to zero and not decrease below zero", -1, 0, -2, 0),
+                Arguments.of("Backstage passes to a TAFKAL80ETC concert", "sell in passed", "drop quality to zero and not decrease below zero", -1, 0, -2, 0)
+        );
+    }
+
+    private static Stream<Arguments> getUpdateQualityForConjuredManaCake() {
+        return Stream.of(
 
                 // TODO: Not implemented yet
                 Arguments.of("Conjured Mana Cake", "quality update", "decrease quality double", 9, 12, 8, 10),
@@ -34,7 +39,7 @@ class GildedRoseParameterizeTest {
     }
 
     @ParameterizedTest(name = "Given item {0} when {1} update quality should return {2}")
-    @MethodSource("gildedrose.refactoring.java.GildedRoseParameterizeTest#getUpdateQuality")
+    @MethodSource("com.gildedrose.refactoring.GildedRoseParameterizeTest#getUpdateQuality")
     void shouldReturnCorrectUpdateQuality(String itemName, String condition, String expectation,
                                           int itemSellIn, int itemQuality, int itemSellInNextDay, int itemQualityNextDay) {
 
