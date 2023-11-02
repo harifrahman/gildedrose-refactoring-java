@@ -1,6 +1,6 @@
 package gildedrose.refactoring.java;
 
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
@@ -9,10 +9,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class GildedRoseTest {
 
-    private GildedRose gildedRose;
+    private static GildedRose gildedRose;
 
-    @BeforeEach
-    void setUp() {
+    @BeforeAll
+    static void setUp() {
         Item[] items = new Item[]{
                 new Item("+5 Dexterity Vest", 10, 20),
                 new Item("Aged Brie", 2, 0),
