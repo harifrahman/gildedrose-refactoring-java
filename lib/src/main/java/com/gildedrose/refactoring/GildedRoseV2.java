@@ -1,6 +1,8 @@
 package com.gildedrose.refactoring;
 
 class GildedRoseV2 {
+    private static final int MAX_QUALITY = 50;
+
     Item[] items;
 
     public GildedRoseV2(Item[] items) {
@@ -36,48 +38,54 @@ class GildedRoseV2 {
         }
     }
 
-    private int reduceQuality(int currentQuality, int deduction) {
-        return currentQuality > deduction ? currentQuality - deduction : 0;
+    private int degradeQuality(Item item, int deduction) {
+        int finalDeduction = item.sellIn < 0 ? deduction * 2 : deduction;
+        return item.quality > finalDeduction ? item.quality - finalDeduction : 0;
+    }
+
+    private int upgradeQuality(Item item, int addition) {
+        int finalAddition = item.sellIn < 0 ? addition * 2 : addition;
+        return item.quality + finalAddition < MAX_QUALITY ? item.quality + finalAddition : MAX_QUALITY;
     }
 
     private Item updateNormalItem(Item item) {
-        item.quality--;
         item.sellIn--;
+        item.quality = degradeQuality(item, 1);
         return item;
     }
 
     private Item updateConjured(Item item) {
-        item.quality -= 2;
         item.sellIn--;
+        item.quality = degradeQuality(item, 2);
         return item;
     }
 
     private Item updateAgedBrie(Item item) {
-        item.quality++;
         item.sellIn--;
+        item.quality = upgradeQuality(item, 1);
         return item;
     }
 
     private Item updateBackstagePasses(Item item) {
         int sellIn = item.sellIn;
-        if (sellIn == 0) {
+        item.sellIn--;
+
+        if (sellIn < 1) {
             item.quality = 0;
             return item;
         }
 
         if (sellIn <= 5) {
-            item.quality += 3;
+            item.quality = upgradeQuality(item, 3);
+            return item;
         }
 
         if (sellIn <= 10) {
-            item.quality += 2;
+            item.quality = upgradeQuality(item, 2);
+            return item;
         }
 
-        if (sellIn > 10) {
-            item.quality++;
-        }
-
-        item.sellIn--;
+        item.quality = upgradeQuality(item, 1);
         return item;
     }
 }
