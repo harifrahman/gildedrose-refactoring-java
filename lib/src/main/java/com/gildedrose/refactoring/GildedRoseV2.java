@@ -45,7 +45,7 @@ class GildedRoseV2 {
 
     private int upgradeQuality(Item item, int addition) {
         int finalAddition = item.sellIn < 0 ? addition * 2 : addition;
-        return item.quality + finalAddition < MAX_QUALITY ? item.quality + finalAddition : MAX_QUALITY;
+        return Math.min(item.quality + finalAddition, MAX_QUALITY);
     }
 
     private Item updateNormalItem(Item item) {
