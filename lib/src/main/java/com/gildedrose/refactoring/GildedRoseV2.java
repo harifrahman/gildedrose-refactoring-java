@@ -10,31 +10,27 @@ class GildedRoseV2 {
     }
 
     public void updateQuality() {
-        for (int i = 0; i < items.length; i++) {
-            if (items[i].name.equals("Sulfuras, Hand of Ragnaros")) {
+        for (Item currentItem : items) {
+            if (currentItem.name.equals("Sulfuras, Hand of Ragnaros")) {
                 continue;
             }
 
-            if (items[i].name.equals("Aged Brie")) {
-                Item updatedItem = updateAgedBrie(items[i]);
-                items[i] = updatedItem;
+            if (currentItem.name.equals("Aged Brie")) {
+                updateAgedBrie(currentItem);
                 continue;
             }
 
-            if (items[i].name.equals("Backstage passes to a TAFKAL80ETC concert")) {
-                Item updatedItem = updateBackstagePasses(items[i]);
-                items[i] = updatedItem;
+            if (currentItem.name.equals("Backstage passes to a TAFKAL80ETC concert")) {
+                updateBackstagePasses(currentItem);
                 continue;
             }
 
-            if (items[i].name.equals("Conjured Mana Cake")) {
-                Item updatedItem = updateConjured(items[i]);
-                items[i] = updatedItem;
+            if (currentItem.name.equals("Conjured Mana Cake")) {
+                updateConjured(currentItem);
                 continue;
             }
 
-            Item updatedItem = updateNormalItem(items[i]);
-            items[i] = updatedItem;
+            updateNormalItem(currentItem);
         }
     }
 
@@ -48,44 +44,40 @@ class GildedRoseV2 {
         return Math.min(item.quality + finalAddition, MAX_QUALITY);
     }
 
-    private Item updateNormalItem(Item item) {
+    private void updateNormalItem(Item item) {
         item.sellIn--;
         item.quality = degradeQuality(item, 1);
-        return item;
     }
 
-    private Item updateConjured(Item item) {
+    private void updateConjured(Item item) {
         item.sellIn--;
         item.quality = degradeQuality(item, 2);
-        return item;
     }
 
-    private Item updateAgedBrie(Item item) {
+    private void updateAgedBrie(Item item) {
         item.sellIn--;
         item.quality = upgradeQuality(item, 1);
-        return item;
     }
 
-    private Item updateBackstagePasses(Item item) {
+    private void updateBackstagePasses(Item item) {
         int sellIn = item.sellIn;
         item.sellIn--;
 
         if (sellIn < 1) {
             item.quality = 0;
-            return item;
+            return;
         }
 
         if (sellIn <= 5) {
             item.quality = upgradeQuality(item, 3);
-            return item;
+            return;
         }
 
         if (sellIn <= 10) {
             item.quality = upgradeQuality(item, 2);
-            return item;
+            return;
         }
 
         item.quality = upgradeQuality(item, 1);
-        return item;
     }
 }
