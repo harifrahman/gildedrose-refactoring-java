@@ -1,8 +1,12 @@
 # gildedrose-refactoring-java
 
-Arif learn and implement few way to refactor 
+Arif learn and implement some way to refactor 
 
 source [from GildedRose Refactoring (Java)](https://github.com/emilybache/GildedRose-Refactoring-Kata/tree/main/Java)
+
+thjere's 2 version:
+1. [GildedRose.java](https://github.com/harifrahman/gildedrose-refactoring-java/blob/main/lib/src/main/java/com/gildedrose/refactoring/GildedRose.java) is challenge where we try to refactor from the original solution (long-wavy-confused-hard-to-read version)
+2. [GildedRoseV2.java](https://github.com/harifrahman/gildedrose-refactoring-java/blob/main/lib/src/main/java/com/gildedrose/refactoring/GildedRoseV2.java) is challenge for me to create my own original solution from zero
 
 ## What GildedRose purpose ?
 
