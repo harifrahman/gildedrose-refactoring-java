@@ -31,7 +31,7 @@ class GildedRose {
                 continue;
             }
 
-            item.quality = degradeQuality(item);
+            item.quality = degradeQuality(item, 1);
         }
     }
 
@@ -56,8 +56,7 @@ class GildedRose {
     }
 
     private void updateConjuredCake(Item item) {
-        item.quality = degradeQuality(item);
-        item.quality = degradeQuality(item);
+        item.quality = degradeQuality(item, 2);
     }
 
     private int upgradeQuality(Item item) {
@@ -65,8 +64,8 @@ class GildedRose {
         return Math.min(item.quality + finalAddition, MAX_QUALITY);
     }
 
-    private int degradeQuality(Item item) {
-        int finalDeduction = item.sellIn < 0 ? 2 : 1;
+    private int degradeQuality(Item item, int deduction) {
+        int finalDeduction = item.sellIn < 0 ? 2 * deduction : deduction;
         return Math.max(item.quality - finalDeduction, MIN_QUALITY);
     }
 }
