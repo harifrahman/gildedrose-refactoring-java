@@ -29,40 +29,33 @@ class GildedRose {
                 continue;
             }
 
-            if (!items[i].name.equals("Backstage passes to a TAFKAL80ETC concert")) {
-                if (items[i].quality > 0) {
-                    items[i].quality--;
+            if (items[i].name.equals("Backstage passes to a TAFKAL80ETC concert") && items[i].quality < 50) {
+                items[i].sellIn--;
+
+                if (items[i].sellIn < 0) {
+                    items[i].quality = 0;
+                    continue;
                 }
-            } else {
-                if (items[i].quality < 50) {
+
+                items[i].quality++;
+
+                if (items[i].sellIn < 5 && items[i].quality < 50) {
                     items[i].quality++;
-
-                    if (items[i].name.equals("Backstage passes to a TAFKAL80ETC concert")) {
-                        if (items[i].sellIn < 11) {
-                            if (items[i].quality < 50) {
-                                items[i].quality++;
-                            }
-                        }
-
-                        if (items[i].sellIn < 6) {
-                            if (items[i].quality < 50) {
-                                items[i].quality++;
-                            }
-                        }
-                    }
                 }
+                if (items[i].sellIn < 10 && items[i].quality < 50) {
+                    items[i].quality++;
+                }
+
+                continue;
             }
 
             items[i].sellIn--;
+            if (items[i].quality > 0) {
+                items[i].quality--;
+            }
 
-            if (items[i].sellIn < 0) {
-                if (!items[i].name.equals("Backstage passes to a TAFKAL80ETC concert")) {
-                    if (items[i].quality > 0) {
-                        items[i].quality--;
-                    }
-                } else {
-                    items[i].quality = 0;
-                }
+            if (items[i].sellIn < 0 && items[i].quality > 0) {
+                items[i].quality--;
             }
         }
     }
