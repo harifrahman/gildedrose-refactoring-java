@@ -13,7 +13,23 @@ class GildedRose {
                 continue;
             }
 
-            if (!items[i].name.equals("Aged Brie") && !items[i].name.equals("Backstage passes to a TAFKAL80ETC concert")) {
+            if (items[i].name.equals("Aged Brie")) {
+                items[i].sellIn--;
+
+                if (items[i].quality >= 50) {
+                    continue;
+                }
+
+                if (items[i].sellIn < 0 && items[i].quality < 49) {
+                    items[i].quality += 2;
+                    continue;
+                }
+
+                items[i].quality++;
+                continue;
+            }
+
+            if (!items[i].name.equals("Backstage passes to a TAFKAL80ETC concert")) {
                 if (items[i].quality > 0) {
                     items[i].quality--;
                 }
@@ -40,18 +56,12 @@ class GildedRose {
             items[i].sellIn--;
 
             if (items[i].sellIn < 0) {
-                if (!items[i].name.equals("Aged Brie")) {
-                    if (!items[i].name.equals("Backstage passes to a TAFKAL80ETC concert")) {
-                        if (items[i].quality > 0) {
-                            items[i].quality--;
-                        }
-                    } else {
-                        items[i].quality = 0;
+                if (!items[i].name.equals("Backstage passes to a TAFKAL80ETC concert")) {
+                    if (items[i].quality > 0) {
+                        items[i].quality--;
                     }
                 } else {
-                    if (items[i].quality < 50) {
-                        items[i].quality++;
-                    }
+                    items[i].quality = 0;
                 }
             }
         }
