@@ -1,6 +1,7 @@
 package com.gildedrose.refactoring;
 
 class GildedRose {
+    public static final int MAX_QUALITY = 50;
     Item[] items;
 
     public GildedRose(Item[] items) {
@@ -15,21 +16,11 @@ class GildedRose {
 
             if (item.name.equals("Aged Brie")) {
                 item.sellIn--;
-
-                if (item.quality >= 50) {
-                    continue;
-                }
-
-                if (item.sellIn < 0 && item.quality < 49) {
-                    item.quality += 2;
-                    continue;
-                }
-
-                item.quality++;
+                item.quality = upgradeQuality(item);
                 continue;
             }
 
-            if (item.name.equals("Backstage passes to a TAFKAL80ETC concert") && item.quality < 50) {
+            if (item.name.equals("Backstage passes to a TAFKAL80ETC concert")) {
                 item.sellIn--;
 
                 if (item.sellIn < 0) {
@@ -37,13 +28,13 @@ class GildedRose {
                     continue;
                 }
 
-                item.quality++;
+                item.quality = upgradeQuality(item);
 
-                if (item.sellIn < 5 && item.quality < 50) {
-                    item.quality++;
+                if (item.sellIn < 5) {
+                    item.quality = upgradeQuality(item);
                 }
-                if (item.sellIn < 10 && item.quality < 50) {
-                    item.quality++;
+                if (item.sellIn < 10) {
+                    item.quality = upgradeQuality(item);
                 }
 
                 continue;
@@ -58,5 +49,10 @@ class GildedRose {
                 item.quality--;
             }
         }
+    }
+
+    private int upgradeQuality(Item item) {
+        int finalAddition = item.sellIn < 0 ? 2 : 1;
+        return Math.min(item.quality + finalAddition, MAX_QUALITY);
     }
 }
