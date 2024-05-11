@@ -22,7 +22,6 @@ class GildedRoseTest {
                 new Item("Backstage passes to a TAFKAL80ETC concert", 15, 20),
                 new Item("Backstage passes to a TAFKAL80ETC concert", 10, 49),
                 new Item("Backstage passes to a TAFKAL80ETC concert", 5, 49),
-                // this conjured item does not work properly yet
                 new Item("Conjured Mana Cake", 3, 6)};
 
         gildedRose = new GildedRose(items);
@@ -46,7 +45,7 @@ class GildedRoseTest {
                 new Item("Backstage passes to a TAFKAL80ETC concert", 14, 21),
                 new Item("Backstage passes to a TAFKAL80ETC concert", 9, 50),
                 new Item("Backstage passes to a TAFKAL80ETC concert", 4, 50),
-                new Item("Conjured Mana Cake", 2, 5)
+                new Item("Conjured Mana Cake", 2, 4)
         };
 
         gildedRose.updateQuality();

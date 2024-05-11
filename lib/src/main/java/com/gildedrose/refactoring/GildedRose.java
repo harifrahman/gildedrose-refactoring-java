@@ -21,6 +21,11 @@ class GildedRose {
                 continue;
             }
 
+            if (item.name.equals("Conjured Mana Cake")) {
+                updateConjuredCake(item);
+                continue;
+            }
+
             if (item.name.equals("Backstage passes to a TAFKAL80ETC concert")) {
                 updateBackstagePasses(item);
                 continue;
@@ -48,6 +53,11 @@ class GildedRose {
 
     private void updateAgedBrie(Item item) {
         item.quality = upgradeQuality(item);
+    }
+
+    private void updateConjuredCake(Item item) {
+        item.quality = degradeQuality(item);
+        item.quality = degradeQuality(item);
     }
 
     private int upgradeQuality(Item item) {
