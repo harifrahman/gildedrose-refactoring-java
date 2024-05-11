@@ -8,54 +8,54 @@ class GildedRose {
     }
 
     public void updateQuality() {
-        for (int i = 0; i < items.length; i++) {
-            if (items[i].name.equals("Sulfuras, Hand of Ragnaros")) {
+        for (Item item : items) {
+            if (item.name.equals("Sulfuras, Hand of Ragnaros")) {
                 continue;
             }
 
-            if (items[i].name.equals("Aged Brie")) {
-                items[i].sellIn--;
+            if (item.name.equals("Aged Brie")) {
+                item.sellIn--;
 
-                if (items[i].quality >= 50) {
+                if (item.quality >= 50) {
                     continue;
                 }
 
-                if (items[i].sellIn < 0 && items[i].quality < 49) {
-                    items[i].quality += 2;
+                if (item.sellIn < 0 && item.quality < 49) {
+                    item.quality += 2;
                     continue;
                 }
 
-                items[i].quality++;
+                item.quality++;
                 continue;
             }
 
-            if (items[i].name.equals("Backstage passes to a TAFKAL80ETC concert") && items[i].quality < 50) {
-                items[i].sellIn--;
+            if (item.name.equals("Backstage passes to a TAFKAL80ETC concert") && item.quality < 50) {
+                item.sellIn--;
 
-                if (items[i].sellIn < 0) {
-                    items[i].quality = 0;
+                if (item.sellIn < 0) {
+                    item.quality = 0;
                     continue;
                 }
 
-                items[i].quality++;
+                item.quality++;
 
-                if (items[i].sellIn < 5 && items[i].quality < 50) {
-                    items[i].quality++;
+                if (item.sellIn < 5 && item.quality < 50) {
+                    item.quality++;
                 }
-                if (items[i].sellIn < 10 && items[i].quality < 50) {
-                    items[i].quality++;
+                if (item.sellIn < 10 && item.quality < 50) {
+                    item.quality++;
                 }
 
                 continue;
             }
 
-            items[i].sellIn--;
-            if (items[i].quality > 0) {
-                items[i].quality--;
+            item.sellIn--;
+            if (item.quality > 0) {
+                item.quality--;
             }
 
-            if (items[i].sellIn < 0 && items[i].quality > 0) {
-                items[i].quality--;
+            if (item.sellIn < 0 && item.quality > 0) {
+                item.quality--;
             }
         }
     }
