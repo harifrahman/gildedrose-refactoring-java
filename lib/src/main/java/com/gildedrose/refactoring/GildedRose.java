@@ -11,28 +11,32 @@ class GildedRose {
 
     public void updateQuality() {
         for (Item item : items) {
-            if (item.name.equals("Sulfuras, Hand of Ragnaros")) {
-                continue;
-            }
-
-            item.sellIn--;
-            if (item.name.equals("Aged Brie")) {
-                updateAgedBrie(item);
-                continue;
-            }
-
-            if (item.name.equals("Conjured Mana Cake")) {
-                updateConjuredCake(item);
-                continue;
-            }
-
-            if (item.name.equals("Backstage passes to a TAFKAL80ETC concert")) {
-                updateBackstagePasses(item);
-                continue;
-            }
-
-            item.quality = degradeQuality(item, 1);
+            updateItem(item);
         }
+    }
+
+    private void updateItem(Item item) {
+        if (item.name.equals("Sulfuras, Hand of Ragnaros")) {
+            return;
+        }
+
+        item.sellIn--;
+        if (item.name.equals("Aged Brie")) {
+            updateAgedBrie(item);
+            return;
+        }
+
+        if (item.name.equals("Conjured Mana Cake")) {
+            updateConjuredCake(item);
+            return;
+        }
+
+        if (item.name.equals("Backstage passes to a TAFKAL80ETC concert")) {
+            updateBackstagePasses(item);
+            return;
+        }
+
+        item.quality = degradeQuality(item, 1);
     }
 
     private void updateBackstagePasses(Item item) {
