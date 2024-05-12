@@ -202,8 +202,6 @@ class GildedRoseTest {
 
     @Nested
     class TestConjured {
-
-        // TODO: Not implemented yet
         @Test
         void givenConjuredWhenQualityUpdateThenShouldDecreaseQualityDouble() {
             Item[] items = new Item[]{new Item("Conjured Mana Cake", 9, 12)};

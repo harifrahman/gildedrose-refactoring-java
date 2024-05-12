@@ -1,9 +1,22 @@
 package com.gildedrose.refactoring;
 
+import com.gildedrose.refactoring.item.AgedBrieModifier;
+import com.gildedrose.refactoring.item.BackstagesPassesModifier;
+import com.gildedrose.refactoring.item.ConjuredCakeModifier;
+import com.gildedrose.refactoring.item.NormalItemModifier;
+
+import java.util.HashMap;
+import java.util.Map;
+
 class GildedRose {
-    private static final int MAX_QUALITY = 50;
-    private static final int MIN_QUALITY = 0;
     Item[] items;
+    private static final Map<String, ItemModifier> ITEM_MODIFIER_MAP = new HashMap<>() {
+        {
+            put("Aged Brie", new AgedBrieModifier());
+            put("Conjured Mana Cake", new ConjuredCakeModifier());
+            put("Backstage passes to a TAFKAL80ETC concert", new BackstagesPassesModifier());
+        }
+    };
 
     public GildedRose(Item[] items) {
         this.items = items;
@@ -21,55 +34,7 @@ class GildedRose {
         }
 
         item.sellIn--;
-        if (item.name.equals("Aged Brie")) {
-            updateAgedBrie(item);
-            return;
-        }
-
-        if (item.name.equals("Conjured Mana Cake")) {
-            updateConjuredCake(item);
-            return;
-        }
-
-        if (item.name.equals("Backstage passes to a TAFKAL80ETC concert")) {
-            updateBackstagePasses(item);
-            return;
-        }
-
-        item.quality = degradeQuality(item, 1);
-    }
-
-    private void updateBackstagePasses(Item item) {
-        if (item.sellIn < 0) {
-            item.quality = 0;
-            return;
-        }
-
-        item.quality = upgradeQuality(item);
-
-        if (item.sellIn < 5) {
-            item.quality = upgradeQuality(item);
-        }
-        if (item.sellIn < 10) {
-            item.quality = upgradeQuality(item);
-        }
-    }
-
-    private void updateAgedBrie(Item item) {
-        item.quality = upgradeQuality(item);
-    }
-
-    private void updateConjuredCake(Item item) {
-        item.quality = degradeQuality(item, 2);
-    }
-
-    private int upgradeQuality(Item item) {
-        int finalAddition = item.sellIn < 0 ? 2 : 1;
-        return Math.min(item.quality + finalAddition, MAX_QUALITY);
-    }
-
-    private int degradeQuality(Item item, int deduction) {
-        int finalDeduction = item.sellIn < 0 ? 2 * deduction : deduction;
-        return Math.max(item.quality - finalDeduction, MIN_QUALITY);
+        ItemModifier itemModifier = ITEM_MODIFIER_MAP.getOrDefault(item.name, new NormalItemModifier());
+        itemModifier.updateItem(item);
     }
 }
